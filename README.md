@@ -111,16 +111,10 @@ main.js (entry point)
 
 ---
 
-## Screenshots
-
-*(Add screenshots to showcase the board, move highlights, and promotion modal)*
-
----
-
 ## License
 
-MIT License — free to use, modify, and share.
+— free to use, modify, and share.
 
 ---
 
-**Note:** The UI theme is **inspired by Chess.com Dark Mode**, adapted for this browser
+**Note:** The UI theme is **inspired by Chess.com Dark Mode**
