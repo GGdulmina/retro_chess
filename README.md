@@ -63,7 +63,7 @@ Additional details:
 
 ## File Structure
 ```text
-chess-project/
+retro_hess/
 ├── index.html           # Entry point
 ├── README.md
 ├── css/
