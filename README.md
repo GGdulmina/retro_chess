@@ -62,6 +62,7 @@ Additional details:
 ---
 
 ## File Structure
+```text
 chess-project/
 ├── index.html           # Entry point
 ├── README.md
@@ -74,7 +75,7 @@ chess-project/
     ├── game.js          # Game state, move execution, history
     ├── ui.js            # DOM rendering and event handling
     └── main.js          # Bootstrap (DOMContentLoaded)
-
+```
 ---
 
 ## Architecture
