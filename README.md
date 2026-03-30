@@ -66,21 +66,17 @@ Additional details:
 
 
 chess-project/
-│
-├── index.html # Entry point
+├── index.html           # Entry point
 ├── README.md
-│
 ├── css/
-│ └── styles.css # Dark navy/cream theme, responsive layout
-│
+│   └── styles.css       # Dark navy/cream theme, responsive layout
 └── js/
-├── pieces.js # Piece symbols, values, metadata
-├── rules.js # Move generation, check detection, all special rules
-├── board.js # Board creation and initial layout
-├── game.js # Game state, move execution, history
-├── ui.js # DOM rendering and event handling
-└── main.js # Bootstrap (DOMContentLoaded)
-
+    ├── pieces.js        # Piece symbols, values, metadata
+    ├── rules.js         # Move generation, check detection, all special rules
+    ├── board.js         # Board creation and initial layout
+    ├── game.js          # Game state, move execution, history
+    ├── ui.js            # DOM rendering and event handling
+    └── main.js          # Bootstrap (DOMContentLoaded)
 
 ---
 
