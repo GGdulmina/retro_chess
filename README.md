@@ -1,4 +1,4 @@
-# RETRO_♟_CHESS ♟️
+# RETRO_♟_CHESS 
 
 ![Project Status](https://img.shields.io/badge/Status-Completed-success) ![Technologies](https://img.shields.io/badge/Tech-HTML%20|%20CSS%20|%20JavaScript-blue)
 
