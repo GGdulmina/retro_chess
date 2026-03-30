@@ -38,7 +38,6 @@ Open `index.html` in any modern browser. No server required.
 ---
 
 ## Theme / UI
-
 Inspired by **Chess.com Dark Mode**, adapted with navy and cream tones:
 
 | Element          | Color / Value            |
@@ -63,8 +62,6 @@ Additional details:
 ---
 
 ## File Structure
-
-
 chess-project/
 ├── index.html           # Entry point
 ├── README.md
@@ -81,8 +78,6 @@ chess-project/
 ---
 
 ## Architecture
-
-
 pieces.js ──► rules.js (pure logic, no DOM)
 board.js ──► │
 ▼
@@ -102,7 +97,6 @@ main.js (entry point)
 ---
 
 ## Extending the Game
-
 - **AI Opponent** — Add `ai.js` using `Rules.getAllLegalMoves(board, 'black', state)` with **minimax + alpha-beta pruning**.  
 - **Timers** — Add `clock.js` to count down per-player time, integrated with `Game.executeMove()`.  
 - **Persistence** — Save game state to `localStorage` after each move.  
@@ -112,7 +106,6 @@ main.js (entry point)
 ---
 
 ## License
-
 — free to use, modify, and share.
 
 ---
