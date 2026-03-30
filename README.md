@@ -111,4 +111,7 @@ main.js (entry point)
 
 ---
 
+## Screenshot
+![GAME](retro_chess.png)
+
 **Note:** The UI theme is **inspired by Chess.com Dark Mode**
