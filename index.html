@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div id="app">
+    <header class="game-header">
+      <h1 class="game-title">RETRO_♟_CHESS</h1>
+    </header>
+
+    <main class="game-container">
+
+      <!-- Left Panel -->
+      <aside class="side-panel left-panel">
+        <div class="player-card" id="card-black">
+          <div class="player-label">BLACK</div>
+          <div class="captured-pieces" id="black-captured"></div>
+        </div>
+        <div class="move-history-panel">
+          <div class="panel-title">MOVES</div>
+          <div class="history-list" id="history-list"></div>
+        </div>
+      </aside>
+
+      <!-- Board -->
+      <section class="board-wrapper">
+        <div class="board-container">
+          <div class="rank-labels" id="rank-labels"></div>
+          <div class="board-col">
+            <div id="chess-board" class="chess-board"></div>
+            <div class="file-labels" id="file-labels"></div>
+          </div>
+        </div>
+        <div class="game-status" id="game-status">WHITE TO MOVE</div>
+      </section>
+
+      <!-- Right Panel -->
+      <aside class="side-panel right-panel">
+        <div class="player-card" id="card-white">
+          <div class="player-label">WHITE</div>
+          <div class="captured-pieces" id="white-captured"></div>
+        </div>
+        <div class="controls">
+          <button id="btn-new-game" class="btn btn-primary">NEW GAME</button>
+          <button id="btn-flip-board" class="btn btn-secondary">FLIP BOARD</button>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot dot-move"></span> Move</div>
+          <div class="legend-item"><span class="legend-dot dot-capture"></span> Capture</div>
+          <div class="legend-item"><span class="legend-dot dot-check"></span> Check</div>
+        </div>
+      </aside>
+
+    </main>
+  </div>
+
+  <!-- Pawn Promotion Modal -->
+  <div id="promotion-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Promote pawn">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <p class="modal-title">PROMOTE PAWN</p>
+      <div class="promotion-options" id="promotion-options"></div>
+    </div>
+  </div>
+
+  <script src="js/pieces.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

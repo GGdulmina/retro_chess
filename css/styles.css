@@ -1,0 +1,423 @@
+/* ═══════════════════════════════════════════════════════════
+   CHESS — Chess.com Dark UI Theme
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  /* Core UI Colors */
+  --bg:              #312e2b; 
+  --panel-bg:        #262421;    
+  --border:          #403d39; 
+  --border-hover:    #5c5a57;
+
+  /* Board Colors */
+  --board-dark:      #739552; 
+  --board-light:     #ebecd0; 
+
+  /* Piece Colors (assuming text-based pieces) */
+  --piece-white:     #ffffff; 
+  --piece-black:     #000000; 
+
+  /* Highlights & Indicators */
+  --hi-move:         rgba(255, 255, 51, 0.5); /* Yellow highlight for moves */
+  --hi-selected:     rgba(255, 255, 51, 0.5);  
+  --hi-move-dot:     rgba(0, 0, 0, 0.15); /* Translucent black for legal moves */
+  --hi-capture-ring: rgba(0, 0, 0, 0.15);
+  --hi-check:        rgba(235, 97, 80, 0.8); /* Red check square */  
+
+  /* Typography */
+  --text-primary:    #ffffff; 
+  --text-dim:        #c3c3c2; 
+
+  /* Accent / Buttons */
+  --accent:          #81b64c; 
+  --accent-hover:    #a3d160; 
+  --btn-secondary:   #363431;
+  --btn-secondary-hover: #454340;
+
+  --sq:              76px; 
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Body ───────────────────────────────────────────────────── */
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 48px;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.game-header {
+  padding: 24px 0 16px;
+}
+.game-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* ── Game Layout ────────────────────────────────────────────── */
+.game-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 0 20px;
+  max-width: 1080px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── Side Panels ────────────────────────────────────────────── */
+.side-panel {
+  width: 250px; /* Slightly wider for modern layout */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 0;
+}
+
+/* Player Card */
+.player-card {
+  background: var(--panel-bg);
+  border-radius: 5px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.player-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.captured-pieces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  min-height: 24px;
+  align-items: center;
+  font-size: 18px;
+  line-height: 1;
+}
+.cap-piece { opacity: 0.8; }
+
+/* Move History */
+.move-history-panel {
+  background: var(--panel-bg);
+  border-radius: 5px;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  padding: 12px 16px;
+  background: #211f1c; /* Slightly darker header */
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+}
+.history-list {
+  max-height: 340px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  padding: 8px 0;
+}
+.history-list::-webkit-scrollbar { width: 6px; }
+.history-list::-webkit-scrollbar-track { background: transparent; }
+.history-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.history-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 1fr;
+  padding: 6px 16px;
+  transition: background 0.1s;
+}
+.history-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+.history-row:hover { background: rgba(255, 255, 255, 0.08); }
+.move-num   { color: var(--text-dim); font-size: 13px; font-weight: 600; text-align: left; }
+.move-white { color: var(--text-primary); font-size: 14px; font-weight: 600; cursor: pointer; }
+.move-black { color: var(--text-primary); font-size: 14px; font-weight: 600; cursor: pointer; }
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #211f1c;
+  border-top: 1px solid var(--border);
+}
+.btn {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s;
+  background: var(--btn-secondary);
+  color: var(--text-primary);
+  width: 100%;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+}
+.btn:hover { background: var(--btn-secondary-hover); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.2); }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* Legend (Hidden by default in standard chess ui, but kept if needed) */
+.legend { display: none; }
+
+/* ── Board ──────────────────────────────────────────────────── */
+.board-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.board-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+.board-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Coordinate Labels */
+.rank-labels {
+  display: flex;
+  flex-direction: column;
+  padding-right: 4px;
+}
+.rank-label {
+  width: 16px;
+  height: var(--sq);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+.file-labels {
+  display: flex;
+  padding-top: 4px;
+}
+.file-label {
+  width: var(--sq);
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+/* The Board Grid */
+.chess-board {
+  display: grid;
+  grid-template-columns: repeat(8, var(--sq));
+  grid-template-rows: repeat(8, var(--sq));
+  border-radius: 3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+/* Squares */
+.square {
+  width:  var(--sq);
+  height: var(--sq);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+.sq-dark  { background-color: var(--board-dark); color: var(--board-light); }
+.sq-light { background-color: var(--board-light); color: var(--board-dark); }
+
+/* Selected/Moved square */
+.sq-selected, .sq-move-history {
+  background-color: var(--hi-move) !important;
+}
+
+/* Move dot overlay (Empty square legal move) */
+.square.sq-move::after {
+  content: '';
+  position: absolute;
+  width: 32%;
+  height: 32%;
+  border-radius: 50%;
+  background: var(--hi-move-dot);
+  pointer-events: none;
+}
+
+/* Capture ring overlay (Enemy piece square) */
+.square.sq-capture::after {
+  content: '';
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  border: 6px solid var(--hi-capture-ring);
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Check glow */
+.sq-check {
+  background: radial-gradient(ellipse at center, var(--hi-check) 0%, transparent 80%) !important;
+}
+
+/* ── Pieces ─────────────────────────────────────────────────── */
+.piece {
+  font-size: calc(var(--sq) * 0.8);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.05s ease;
+}
+.piece-white {
+  color: var(--piece-white);
+  -webkit-text-stroke: 1.5px #2c2c2c;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+.piece-black {
+  color: var(--piece-black);
+  -webkit-text-stroke: 1px #2c2c2c;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+}
+
+/* ── Status Bar ─────────────────────────────────────────────── */
+.game-status {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 12px 24px;
+  border-radius: 4px;
+  background: var(--panel-bg);
+  min-width: 260px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.status-check {
+  background: #c33e3e;
+  color: #fff;
+}
+.status-checkmate {
+  background: #81b64c;
+  color: #fff;
+}
+
+/* ── Promotion Modal ────────────────────────────────────────── */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.modal.hidden { display: none; }
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-content {
+  position: relative;
+  background: #eceed1; /* Promotion backgrounds are usually light */
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+.modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #312e2b;
+  margin-bottom: 16px;
+}
+.promotion-options {
+  display: flex;
+  gap: 10px;
+}
+.promo-btn {
+  width: 70px;
+  height: 70px;
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  font-size: 50px;
+  line-height: 1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.promo-btn:hover {
+  border-color: var(--accent);
+  background: #f7f7f7;
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 940px) {
+  .game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .side-panel {
+    width: 100%;
+    max-width: calc(8 * var(--sq));
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .player-card { flex: 1; min-width: 140px; }
+  .move-history-panel { width: 100%; }
+  .history-list { max-height: 150px; }
+  .controls { flex-direction: row; width: 100%; padding: 8px; }
+  .btn { flex: 1; font-size: 14px; padding: 10px; }
+}
+
+@media (max-width: 620px) {
+  :root { --sq: 44px; }
+  .piece { font-size: calc(var(--sq) * 0.8); }
+  .square.sq-capture::after { border-width: 4px; }
+  .game-title { font-size: 20px; }
+}
+
+@media (max-width: 400px) {
+  :root { --sq: 38px; }
+  .piece { font-size: calc(var(--sq) * 0.8); }
+}
