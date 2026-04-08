@@ -1,6 +1,6 @@
 # RETRO_♟_CHESS 
 
-![Project Status](https://img.shields.io/badge/Status-Completed-success) ![Technologies](https://img.shields.io/badge/Tech-HTML%20|%20CSS%20|%20JavaScript-blue)
+![Status](https://img.shields.io/badge/Status-In%20Progress-orange) ![Technologies](https://img.shields.io/badge/Tech-HTML%20|%20CSS%20|%20JavaScript-blue)
 
 A **fully functional, browser-based chess game** — no frameworks, no backend, no dependencies. Built for **clean gameplay, responsive design, and professional UI/UX**.
 
